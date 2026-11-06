@@ -1,0 +1,97 @@
+using System;
+
+internal class Example
+{
+    private int _x;
+    private int _y;
+
+    public Example(int x, int y)
+    {
+        this._x = x;
+        this._y = y;
+    }
+
+    public override string ToString()
+    {
+        return "x = " + _x + ", y = " + _y;
+    }
+    
+    //Унарные операции
+    public static Example operator ++(Example e)
+    {
+        //Нельзя
+        // e._x++;
+        // e._y++;
+        // return e;
+        
+        //Можно и нужно
+        return new Example(e._x++, e._y++);
+    }
+
+    public static Example operator --(Example e)
+    {
+        return new Example(e._x * 2, e._y * 2);
+    }
+    
+    public static bool operator -(Example e)
+    {
+        return e._x > 0;
+    }
+    
+    //Нельзя
+    // public static Example operator -(Example e)
+    // {
+    //     return new Example(-e._x, -e._y);
+    // }
+    
+    //Бинарные операции
+
+    public static Example operator +(Example e1, Example e2)
+    {
+        return new Example(e1._x + e2._x, e1._y + e2._y);
+    }
+    
+    public static Example operator +(Example e1, int x) //Объект слева - лево-сторонняя операция
+    {
+        return new Example(e1._x + x, e1._y + x);
+    }
+    
+    public static Example operator +(int x, Example e1)
+    {
+        return e1 + x;
+    }
+    
+    public static Example operator ^(Example e1, Example e2)
+    {
+        return new Example(e1._x + e2._x, e1._y + e2._y);
+    }
+    
+    public static int operator -(Example e1, Example e2)
+    {
+        return e1._x - e2._x;
+    }
+    
+    //Логические > < >= <= == !=
+    public static bool operator >(Example e1, Example e2) //парная операция, нужна < для работы
+    {
+        return e1._x > e2._x && e1._y > e2._y;
+    }
+    
+    public static bool operator <(Example e1, Example e2)
+    {
+        return e1._x < e2._x && e1._y < e2._y;
+    }
+    
+    //Операции преведения типов
+    //явные
+    public static explicit operator int(Example e1)
+    {
+        return (int)e1._x;
+    }
+    
+    //неявные
+    public static implicit operator bool(Example e)
+    {
+        return e._x > e._y;
+    }
+}   
