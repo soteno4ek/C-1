@@ -1,0 +1,36 @@
+class Program
+{
+    private static void Main(string[] args)
+    {
+        Example e1 = new Example(10, 20);
+        Example e2 = new Example(10, 30);
+        Example e3 = new Example(0, 0);
+
+        e3 = e1++;
+        Console.WriteLine(e3);
+        Console.WriteLine(e1);
+
+        e3 = e2--;
+        Console.WriteLine(e3);
+        Console.WriteLine(e2);
+        // ! - -- ++ унарные операции
+        
+        bool b = -e3;
+        Console.WriteLine(b);
+        //e3 = -e1;
+
+        e3 = e1 + e2;
+        e1 = e3 + e2;
+
+        e3 = e1 + 10;
+        e3 = 50 + e2;
+
+        int x = e1 - e2;
+
+        b = e1 > e3;
+        Console.WriteLine(b);
+
+        x = (int)e2; //_x //явная
+        b = e3; //неявная
+    }
+}
